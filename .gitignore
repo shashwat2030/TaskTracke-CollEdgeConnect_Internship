@@ -3,3 +3,6 @@ frontend/.env
 database_id_password.txt 
 backend/ .env
 problems/
+MongoDBAtlasDatabase.txt
+NewTestDB.txt
+.~lock.railway.json#
