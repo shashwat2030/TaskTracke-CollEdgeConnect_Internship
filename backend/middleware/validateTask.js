@@ -1,6 +1,8 @@
 const validateTask = (req, res, next) => {
   const { title, dueDate, status, priority } = req.body;
-  const validStatus = ["Pending", "In-Progress", "Completed"];
+
+  // 1. UPDATED: Matched exactly to your Mongoose Schema and Frontend payload
+  const validStatus = ["pending", "in-progress", "complete"];
 
   // title presence and empty string check
   if (!title || typeof title !== "string" || title.trim().length === 0) {
@@ -9,6 +11,7 @@ const validateTask = (req, res, next) => {
       message: "Required title and should be non-empty",
     });
   }
+
   // title length boundary check
   if (title.trim().length > 100) {
     return res.status(400).json({
@@ -17,20 +20,24 @@ const validateTask = (req, res, next) => {
     });
   }
 
-  //optional dueDate validation
+  // optional dueDate validation
   if (dueDate) {
     const parsedDate = Date.parse(dueDate);
     if (isNaN(parsedDate)) {
       return res
-        .status(400)
-        .json({ success: false, message: "Invalid dueDate format" });
+          .status(400)
+          .json({ success: false, message: "Invalid dueDate format" });
     }
   }
-  if (status && !validStatus.includes(status)) {
+
+  // 2. UPDATED: Added .toLowerCase() for safe checking against your lowercase array
+  if (status && !validStatus.includes(status.toLowerCase())) {
     return res
-      .status(400)
-      .json({ success: false, message: "Invalid status value" });
+        .status(400)
+        .json({ success: false, message: "Invalid status value" });
   }
+
   next();
 };
+
 module.exports = validateTask;
