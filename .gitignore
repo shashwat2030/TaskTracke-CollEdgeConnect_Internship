@@ -1,3 +1,4 @@
 backend/.env
 frontend/.env
 database_id_password.txt 
+backend/ .env
