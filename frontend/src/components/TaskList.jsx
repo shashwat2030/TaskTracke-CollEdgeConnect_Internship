@@ -32,11 +32,11 @@ export default function TaskList({
     };
     const getStatusColor = (status) => {
         switch (status) {
-            case 'Pending':
+            case 'pending':
                 return '#e74c3c';
-            case 'In Progress':
+            case 'in-progress':
                 return '#f39c12';
-            case 'Completed':
+            case 'complete':
                 return '#27ae60';
             default:
                 return '#95a5a6';

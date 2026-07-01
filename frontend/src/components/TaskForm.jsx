@@ -97,9 +97,9 @@ export default function TaskForm({onSubmit, editingTask = null, isLoading = fals
                         value={formData.status}
                         onChange={handleChange}
                         disabled={isLoading}>
-                        <option value="Pending">Pending</option>
-                        <option value="In-Progress">In Progress</option>
-                        <option value="Complete">Completed</option>
+                        <option value="pending">Pending</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="complete">Completed</option>
                     </select>
                 </div>
                 <div className="form-group">

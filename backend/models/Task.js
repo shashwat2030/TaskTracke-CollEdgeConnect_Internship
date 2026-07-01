@@ -17,11 +17,12 @@ const TaskSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: {
-        values: ["Pending", "In-Progress", "Completed"],
+        values: ["pending", "in-progress", "complete"],
         message: "{value} is invalid status",
       },
       default: "Pending",
-      index: true, //optimizing status filtering
+      index: true,
+        lowercase:true//optimizing status filtering
     },
     priority: {
       type: String,
