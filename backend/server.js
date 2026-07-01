@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const path=require("path");// important missing line
+const path = require("path");// important missing line
 const connectDB = require("./config/db");
 const taskRoutes = require("./routes/taskRoutes");
 const errorHandler = require("./middleware/errorHandler");
@@ -22,13 +22,12 @@ app.use(express.json());
 
 // Application API route mounting
 app.use("/api/tasks", taskRoutes);
- const frontendPath=path.join(__dirname,"dist");
- app.use(express.static(frontendPath));
+const frontendPath = path.join(__dirname, "dist");
+app.use(express.static(frontendPath));
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(frontendPath,"index.html"));
+app.use((req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
 });
-
 
 // System Error Pipeline Fallback Interceptor (Must reside at final execution  position )
 app.use(errorHandler);
