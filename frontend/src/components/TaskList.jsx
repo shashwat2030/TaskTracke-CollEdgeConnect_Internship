@@ -20,11 +20,11 @@ export default function TaskList({
     };
     const getPriorityColor = (priority) => {
         switch (priority) {
-            case 'High' :
+            case 'high' :
                 return '#e74c3c';
-            case 'Medium' :
+            case 'medium' :
                 return '#f39c12';
-            case 'Low':
+            case 'low':
                 return '#27ae60';
             default:
                 return '#95a5a6';
@@ -69,9 +69,9 @@ export default function TaskList({
                             value={filters.status}
                             onChange={(e) => handleFilterChange('status', e.target.value)}>
                             <option value=""> All Status</option>
-                            <option value="Pending">Pending</option>
-                            <option value="In Progress">In Progress</option>
-                            <option value="Completed"> Completed</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="complete"> Completed</option>
                         </select>
                     </div>
 
@@ -82,9 +82,9 @@ export default function TaskList({
                             value={filters.priority}
                             onChange={(e) => handleFilterChange('priority', e.target.value)}>
                             <option value="">All Priority</option>
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
                         </select>
                     </div>
 
