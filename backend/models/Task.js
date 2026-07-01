@@ -1,46 +1,47 @@
 const mongoose = require("mongoose");
 const TaskSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: [true, "Required Title"],
-      trim: true,
-      maxlength: [100, "Title cannot exceed 100 character"],
-      index: true,
+    {
+        title: {
+            type: String,
+            required: [true, "Required Title"],
+            trim: true,
+            maxlength: [100, "Title cannot exceed 100 character"],
+            index: true,
+        },
+        description: {
+            type: String,
+            trim: true,
+            maxlength: [500, "Description cannot exceed 500 characters"],
+            default: "",
+        },
+        status: {
+            type: String,
+            enum: {
+                values: ["pending", "in-progress", "complete"],
+                message: "{value} is invalid status",
+            },
+            default: "pending",
+            index: true,
+            lowercase: true//optimizing status filtering
+        },
+        priority: {
+            type: String,
+            enum: {
+                values: ["low", "medium", "high"],
+                message: "{value} is invalid priority",
+            },
+            default: "medium",
+            lowercase: true
+        },
+        dueDate: {
+            type: Date,
+            default: null,
+        },
     },
-    description: {
-      type: String,
-      trim: true,
-      maxlength: [500, "Description cannot exceed 500 characters"],
-      default: "",
+    {
+        timestamps: true,
     },
-    status: {
-      type: String,
-      enum: {
-        values: ["pending", "in-progress", "complete"],
-        message: "{value} is invalid status",
-      },
-      default: "Pending",
-      index: true,
-        lowercase:true//optimizing status filtering
-    },
-    priority: {
-      type: String,
-      enum: {
-        values: ["Low", "Medium", "High"],
-        message: "{value} is invalid priority",
-      },
-      default: "Medium",
-    },
-    dueDate: {
-      type: Date,
-      default: null,
-    },
-  },
-  {
-    timestamps: true,
-  },
 );
-TaskSchema.index({ status: 1, createdAt: -1 });
+TaskSchema.index({status: 1, createdAt: -1});
 //compound index for status and createdAt for efficient filtering and sorting
 module.exports = mongoose.model("Task", TaskSchema);
